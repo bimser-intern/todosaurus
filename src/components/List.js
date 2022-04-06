@@ -1,8 +1,16 @@
 import React from 'react'
 import { useState } from 'react';
+import './style.css';
+import './tailwind.css';
+
 
 function List() {
     /* 
+     projeyi npm start komutu çalıştırmak istediğimizde "'react-scripts' is not recognized as an internal or external command" hatası alırız. Bu hatayı gidermek için npm install react-scripts --save komutunu kullanırız.
+
+    Componentler, uygulamanızı tekrar kullanılabilir parçalara ayırmanıza ve her bir parçayı ayrı ayrı düşünmenize izin verir. Bu bir buton, bir form, bir diyalog, bir ekran vb. gibi olabilir.
+    Componentler aslında fonksiyon gibi çalışır. Parametre gönderilebilir (bunları props diye adlandırıyoruz), yapacağı spesifik işlemi yapar ve ekranda neler görüneceğini açıklayan React elementleri return ile döndürürler.
+
     useState Hook'u ile tanımlamış olduğumuz headDuty, duty, selectPerson ve list state değişkenlerini setHeadDuty, setDuty, setSelectPerson ve setList fonksiyonlarına bağlarız.
     
     Bu bağlama sonucunda değişkenlerdeki değeri(value) elimizde tutar ve set fonksiyonu ile bu değerleri değiştirebilir hale getiririz.
@@ -25,11 +33,14 @@ function List() {
     const [list, setList] = useState([]);
 
 
+
     return (
-        <div>
-            <div id='topDiv'>
-                <div id='headDutyDiv'>
+        <div className='w-full '>
+            <div id='topDiv' className='w-5/6 h-40 m-auto mt-10 border-solid border-2  rounded-lg border-borderGray'>
+                <div id='headDutyDiv' >
                     <input
+                        id='headInput'
+                        className='w-5/6 left-0 p-2 mt-2 ml-3 border-white  flex  justify-start text-lg font-bold'
                         value={headDuty}
                         onChange={e => setHeadDuty(e.target.value)}
                         placeholder='Heading of Duty'
@@ -37,13 +48,16 @@ function List() {
                 </div>
                 <div id='dutyDiv'>
                     <input
+                        id='dutyInput'
+                        className='w-5/6 left-0 p-2 mt-2 ml-3 border-white flex justify-start'
                         value={duty}
                         onChange={e => setDuty(e.target.value)}
                         placeholder='Write here your duty!'
                     />
                 </div>
-                <div>
+                <div className='flex justify-between'>
                     <select
+                        className='selectPerson rounded-lg p-1 ml-3'
                         value={selectPerson}
                         onChange={(e) => {
 
@@ -51,23 +65,24 @@ function List() {
                             setSelectPerson(selectedPersonal);
                         }}
                     >
+                        <option value="" selected disabled hidden>Who is?</option>
                         <option value='Ufuk Yetiskin'>Ufuk Yetiskin</option>
                         <option value='Ozgur Tipirdamaz'>Ozgur Tipirdamaz</option>
                     </select>
-                    <button  onClick={() => setList([...list, { id: Date.now(), duty:duty, headDuty:headDuty, selectPerson:selectPerson }], setDuty(""), setHeadDuty(""))}  >Add Duty</button>
+                    
+                    <button className='addDuty text-white m-3  bg-buttonColor p-1 rounded-lg mb-1 ' onClick={() => setList([...list, { id: Date.now(),duty: duty, headDuty: headDuty, selectPerson: selectPerson }], setDuty(""), setHeadDuty(""))}  >Add Duty</button>
                 </div>
-
             </div>
-            <div id='buttomDiv'>
+            <div id='bottomDiv' className='w-5/6 h-40 m-auto mt-10'>
                 <ul>
                     <li>
-                        {list.map((item, index) => ( 
+                        {list.map((item, index) => (
                             <div key={index}>
                                 <hr></hr>
-                                <ul>
-                                    <li>{item.headDuty}</li>
-                                    <li>{item.duty}</li>
-                                    <li>{item.selectPerson}</li>
+                                <ul id='ulDiv' className=' text-left flex justify-between p-2'>
+                                    <li className='w-2/6  break-words'>{item.headDuty}</li>
+                                    <li className='w-3/6 break-words'>{item.duty}</li>
+                                    <li className='w-1/6'>{item.selectPerson}</li>
                                 </ul>
                             </div>
                         ))}
@@ -75,10 +90,6 @@ function List() {
                 </ul>
 
             </div>
-
-
-
-
         </div>
     )
 }
