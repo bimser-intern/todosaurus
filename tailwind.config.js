@@ -8,7 +8,10 @@ module.exports = {
       'borderGray': '#c0c0c0',
       'profileButton' : '#fff',
       'inputbg': '#e27065',
-      'placeholder' : '#fff'
+      'placeholder' : '#fff',
+      'category' : '#fafafa',
+      'hoverEffect' : '#ececec',
+      'hrbg' :'hsl(0,0%,93%)'
     },
     extend: {},
   },
