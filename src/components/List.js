@@ -31,7 +31,6 @@ function List() {
     const [headDuty, setHeadDuty] = useState("");
     const [duty, setDuty] = useState("");
     const [selectPerson, setSelectPerson] = useState("");
-    const [check, setCheck] = useState("");
     const [list, setList] = useState([]);
 
     
@@ -75,7 +74,7 @@ function List() {
                         <option value='Ozgur Tipirdamaz'>Ozgur Tipirdamaz</option>
                     </select>
 
-                    <button className='addDuty text-white m-3 text-profileButton  bg-buttonColor p-1 rounded-lg mb-1 ' onClick={() => setList([...list, { id: Date.now(), duty: duty, headDuty: headDuty, selectPerson: selectPerson }], setDuty(""), setHeadDuty(""))}  >Add Duty</button>
+                    <button className='addDuty text-white m-3 text-profileButton  bg-buttonColor p-1 rounded-lg mb-1 ' onClick={() => setList([...list, { id: Date.now(),  duty: duty, headDuty: headDuty, selectPerson: selectPerson }], setDuty(""), setHeadDuty(""))}  >Add Duty</button>
                 </div>
             </div>
             <div id='bottomDiv' className='w-5/6 h-40 m-auto mt-10'>
