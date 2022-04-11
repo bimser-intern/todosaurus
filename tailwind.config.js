@@ -5,7 +5,10 @@ module.exports = {
   theme: {
     colors: {
       'buttonColor': '#db4c3f',
-      'borderGray': '#c0c0c0'
+      'borderGray': '#c0c0c0',
+      'profileButton' : '#fff',
+      'inputbg': '#e27065',
+      'placeholder' : '#fff'
     },
     extend: {},
   },

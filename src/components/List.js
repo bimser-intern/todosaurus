@@ -4,6 +4,7 @@ import './style.css';
 import './tailwind.css';
 
 
+
 function List() {
     /* 
      projeyi npm start komutu çalıştırmak istediğimizde "'react-scripts' is not recognized as an internal or external command" hatası alırız. Bu hatayı gidermek için npm install react-scripts --save komutunu kullanırız.
@@ -32,6 +33,7 @@ function List() {
     const [selectPerson, setSelectPerson] = useState("");
     const [list, setList] = useState([]);
 
+    
 
 
     return (
@@ -41,6 +43,7 @@ function List() {
                     <input
                         id='headInput'
                         className='w-5/6 left-0 p-2 mt-2 ml-3 border-white  flex  justify-start text-lg font-bold'
+                        name='head_input'
                         value={headDuty}
                         onChange={e => setHeadDuty(e.target.value)}
                         placeholder='Heading of Duty'
@@ -50,6 +53,7 @@ function List() {
                     <input
                         id='dutyInput'
                         className='w-5/6 left-0 p-2 mt-2 ml-3 border-white flex justify-start'
+                        name='duty_input'
                         value={duty}
                         onChange={e => setDuty(e.target.value)}
                         placeholder='Write here your duty!'
@@ -69,20 +73,20 @@ function List() {
                         <option value='Ufuk Yetiskin'>Ufuk Yetiskin</option>
                         <option value='Ozgur Tipirdamaz'>Ozgur Tipirdamaz</option>
                     </select>
-                    
-                    <button className='addDuty text-white m-3  bg-buttonColor p-1 rounded-lg mb-1 ' onClick={() => setList([...list, { id: Date.now(),duty: duty, headDuty: headDuty, selectPerson: selectPerson }], setDuty(""), setHeadDuty(""))}  >Add Duty</button>
+
+                    <button className='addDuty text-white m-3 text-profileButton  bg-buttonColor p-1 rounded-lg mb-1 ' onClick={() => setList([...list, { id: Date.now(),  duty: duty, headDuty: headDuty, selectPerson: selectPerson }], setDuty(""), setHeadDuty(""))}  >Add Duty</button>
                 </div>
             </div>
             <div id='bottomDiv' className='w-5/6 h-40 m-auto mt-10'>
                 <ul>
-                    <li>
+                    <li >
                         {list.map((item, index) => (
                             <div key={index}>
                                 <hr></hr>
                                 <ul id='ulDiv' className=' text-left flex justify-between p-2'>
-                                    <li className='w-2/6  break-words'>{item.headDuty}</li>
-                                    <li className='w-3/6 break-words'>{item.duty}</li>
-                                    <li className='w-1/6'>{item.selectPerson}</li>
+                                    <li className='w-2/6  break-words ml-1 li'>{item.headDuty}</li>
+                                    <li className='w-3/6 break-words li'>{item.duty}</li>
+                                    <li className='w-1/6 li'>{item.selectPerson}</li>
                                 </ul>
                             </div>
                         ))}
@@ -90,7 +94,7 @@ function List() {
                 </ul>
 
             </div>
-        </div>
+        </div >
     )
 }
 
