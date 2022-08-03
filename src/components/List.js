@@ -1,7 +1,10 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './style.css';
 import './tailwind.css';
+import { useSelector, useDispatch } from "react-redux";
+import { nanoid } from "@reduxjs/toolkit";
+import {addDuty} from '../redux/slices/listSlice'
 
 
 
@@ -32,10 +35,20 @@ function List() {
     const [duty, setDuty] = useState("");
     const [selectPerson, setSelectPerson] = useState("");
     const [list, setList] = useState([]);
+    const [valid, setValid] = useState("visible");
 
-    
+    const lists = useSelector(state => state.list.items)
+    const dispatch = useDispatch();
+    const  handleSubmit = () => {
+        dispatch(addDuty({id : nanoid(), headDuty, duty ,selectPerson}))
+        setDuty("") 
+        setHeadDuty("")
 
+    }   
+    useEffect(() => {
 
+    }, [lists])
+   
     return (
         <div className='w-full '>
             <div id='topDiv' className='w-5/6 h-40 m-auto mt-10 border-solid border-2  rounded-lg border-borderGray'>
@@ -45,8 +58,10 @@ function List() {
                         className='w-5/6 left-0 p-2 mt-2 ml-3 border-white  flex  justify-start text-lg font-bold'
                         name='head_input'
                         value={headDuty}
-                        onChange={e => setHeadDuty(e.target.value)}
+                        onChange={(e) => setHeadDuty(e.target.value)}
                         placeholder='Heading of Duty'
+                        type='text'
+                        required
                     />
                 </div>
                 <div id='dutyDiv'>
@@ -55,8 +70,10 @@ function List() {
                         className='w-5/6 left-0 p-2 mt-2 ml-3 border-white flex justify-start'
                         name='duty_input'
                         value={duty}
-                        onChange={e => setDuty(e.target.value)}
+                        onChange={(e) => setDuty(e.target.value)}
                         placeholder='Write here your duty!'
+                        type='text'
+                        required
                     />
                 </div>
                 <div className='flex justify-between'>
@@ -68,20 +85,21 @@ function List() {
                             const selectedPersonal = e.target.value;
                             setSelectPerson(selectedPersonal);
                         }}
+                        required
                     >
                         <option value="" selected disabled hidden>Who is?</option>
                         <option value='Ufuk Yetiskin'>Ufuk Yetiskin</option>
                         <option value='Ozgur Tipirdamaz'>Ozgur Tipirdamaz</option>
                     </select>
 
-                    <button className='addDuty text-white m-3 text-profileButton  bg-buttonColor p-1 rounded-lg mb-1 ' onClick={() => setList([...list, { id: Date.now(),  duty: duty, headDuty: headDuty, selectPerson: selectPerson }], setDuty(""), setHeadDuty(""))}  >Add Duty</button>
+                    <button className='addDuty text-white m-3 text-profileButton  bg-buttonColor p-1 rounded-lg mb-1 ' onClick={handleSubmit}  >Add Duty</button>
                 </div>
             </div>
             <div id='bottomDiv' className='w-5/6 h-40 m-auto mt-10'>
                 <ul>
                     <li >
-                        {list.map((item, index) => (
-                            <div key={index}>
+                        { lists && lists.map((item) => (
+                            <div key={item.id}>
                                 <hr></hr>
                                 <ul id='ulDiv' className=' text-left flex justify-between p-2'>
                                     <li className='w-2/6  break-words ml-1 li'>{item.headDuty}</li>

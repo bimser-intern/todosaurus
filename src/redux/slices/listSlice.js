@@ -6,8 +6,11 @@ export const listSlice = createSlice({
         items : [],
     },
     reducers : {
-
+        addDuty : (state, action) => {
+            state.items.push(action.payload)
+        }
     }
 });
 
+export const {addDuty} = listSlice.actions;
 export default listSlice.reducer;
